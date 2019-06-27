@@ -1,11 +1,24 @@
 import React from 'react';
+import { gql } from 'apollo-boost';
+import { graphql } from 'react-apollo';
+
+const getTranslationQuery = gql `
+    {
+        contentText {
+            contentTextItem {
+                key
+                value
+            }
+        }
+    }
+`;
 
 const Homepage = (props) => {
+    console.log(props)
     return (
         <div>
-            {props.key} ---- {props.value}
         </div>
     );
 };
 
-export default Homepage;
+export default graphql(getTranslationQuery)(Homepage);
