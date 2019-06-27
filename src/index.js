@@ -4,13 +4,18 @@ import './assets/styles/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { ApolloProvider } from 'react-apollo';
-import { ApolloClient } from 'apollo-boost';
-import gql from "graphql-tag";
+import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
 
 //connect ApolloClient instance with the GraphQL API
 
-const client = new ApolloClient({
+const cache = new InMemoryCache();
+const link = new HttpLink({
     uri: 'https://api.hexometer.com/v1/ql'
+});
+
+const client = new ApolloClient({
+    cache,
+    link
 });
 
 ReactDOM.render(
